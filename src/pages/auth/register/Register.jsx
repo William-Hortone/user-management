@@ -10,22 +10,19 @@ const Register = () => {
     <section className={`container ${styles.auth}`}>
       <Card>
         <div className={styles.form}>
-          <h2>Login</h2>
+          <h2>Register</h2>
           <form>
             <input type="text" placeholder="Email" required />
             <input type="password" placeholder="Password" required />
-            <button className="--btn --btn-primary --btn-block">Login</button>
-            <div className={styles.links}>
-              <Link to="/reset">reset Password</Link>
-            </div>
-            <p>-- or --</p>
+            <input type="password" placeholder="Confirm Password" required />
+            <button className="--btn --btn-primary --btn-block">
+              Register
+            </button>
           </form>
-          <button className="--btn --btn-danger --btn-block">
-            <FaGoogle color="#fff" /> login with Google
-          </button>
+
           <span className={styles.register}>
-            <p>Don't have an account? </p>
-            <Link>Register</Link>
+            <p>Already have an account? </p>
+            <Link to="/login">Login</Link>
           </span>
         </div>
       </Card>
