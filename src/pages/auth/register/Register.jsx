@@ -2,7 +2,6 @@ import React from "react";
 import styles from "../auth.module.scss";
 import Card from "../../../components/card/Card";
 import { Link } from "react-router-dom";
-import { FaGoogle } from "react-icons/fa";
 import registerImg from "../../../assets/register.png";
 
 const Register = () => {
@@ -22,7 +21,7 @@ const Register = () => {
 
           <span className={styles.register}>
             <p>Already have an account? </p>
-            <Link to="/login">Login</Link>
+            <Link to="/login"> Login</Link>
           </span>
         </div>
       </Card>

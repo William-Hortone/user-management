@@ -20,16 +20,16 @@ const Login = () => {
             <input type="password" placeholder="Password" required />
             <button className="--btn --btn-primary --btn-block">Login</button>
             <div className={styles.links}>
-              <Link to="/reset">reset Password</Link>
+              <Link to="/reset">Reset Password</Link>
             </div>
             <p>-- or --</p>
           </form>
           <button className="--btn --btn-danger --btn-block">
-            <FaGoogle color="#fff" /> login with Google
+            <FaGoogle color="#fff" /> Login with Google
           </button>
           <span className={styles.register}>
             <p>Don't have an account? </p>
-            <Link to="Register">Register</Link>
+            <Link to="Register"> Register</Link>
           </span>
         </div>
       </Card>
