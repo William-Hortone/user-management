@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+// import React, { useState } from "react";
 import styles from "../auth.module.scss";
 import Card from "../../../components/card/Card";
 import { Link, useNavigate } from "react-router-dom";
@@ -7,7 +7,9 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { Loader } from "../../../components";
-import auth from "../../../firebase/config";
+import { auth } from "../../../firebase/config";
+
+import { useState } from "react";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -19,7 +21,6 @@ const Register = () => {
 
   const registerUser = (e) => {
     e.preventDefault();
-    // console.log(email, password);
     if (password !== cPassword) {
       toast.error("Passwords do not match");
     }
@@ -34,8 +35,6 @@ const Register = () => {
         navigate("/login");
       })
       .catch((error) => {
-        // const errorCode = error.code;
-        // const errorMessage = error.message;
         toast.error(error.message);
         setIsLoading(false);
       });
