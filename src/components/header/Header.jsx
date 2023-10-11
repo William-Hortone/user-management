@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./header.module.scss";
-import { Link, NavLink } from "react-router-dom";
-import { FaShoppingCart, FaTimes } from "react-icons/fa";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { FaShoppingCart, FaTimes, FaUserCircle } from "react-icons/fa";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import { auth } from "../../firebase/config";
+import { toast } from "react-toastify";
 
 const logo = (
   <div className={styles.logo}>
@@ -26,6 +29,20 @@ const activeLink = ({ isActive }) => (isActive ? `${styles.active}` : "");
 
 const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
+  const [userName, setUserName] = useState("");
+  const navigate = useNavigate();
+
+  // Monitor current sign in user
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const uid = user.uid;
+        console.log(user.displayName);
+        setUserName(user.displayName);
+      } else {
+      }
+    });
+  }, []);
 
   const handleToggleMenu = () => {
     setShowMenu(!showMenu);
@@ -33,6 +50,17 @@ const Header = () => {
 
   const hideMenu = () => {
     setShowMenu(false);
+  };
+
+  const handleLogout = () => {
+    signOut(auth)
+      .then(() => {
+        toast.success("logout successful");
+        navigate("/");
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
   };
 
   return (
@@ -78,11 +106,17 @@ const Header = () => {
               <NavLink to="/login" className={activeLink}>
                 Login
               </NavLink>
+              <a href="#">
+                <FaUserCircle size={16} /> Hi, {userName}
+              </a>
               <NavLink to="/register" className={activeLink}>
                 Register
               </NavLink>
               <NavLink to="/order" className={activeLink}>
                 My Orders
+              </NavLink>
+              <NavLink to="/order" onClick={handleLogout}>
+                Logout
               </NavLink>
             </span>
             {cart}
