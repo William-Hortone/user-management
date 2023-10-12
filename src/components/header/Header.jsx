@@ -42,12 +42,19 @@ const Header = () => {
       if (user) {
         const uid = user.uid;
         // console.log(user);
-        setUserName(user.displayName);
+        if (user.displayName == null) {
+          const u1 = user.email.slice(0, -10);
+          const uName = u1.charAt(0).toUpperCase() + u1.slice(1);
+          // console.log("uName", uName);
+          setUserName(uName);
+        } else {
+          setUserName(user.displayName);
+        }
 
         dispatch(
           SET_ACTIVE_USER({
             email: user.email,
-            userName: user.displayName,
+            userName: user.displayName ? user.displayName : userName,
             userID: user.uid,
           })
         );
